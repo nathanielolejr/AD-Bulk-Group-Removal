@@ -1,0 +1,17 @@
+# List of users (sAMAccountName or user IDs)
+$users = @(
+    "user1", "user2", "user3", "user4", "user5"
+)
+
+# List of groups to remove users from
+$groups = @(
+    "GroupName1", "GroupName2", "GroupName3"
+)
+
+foreach ($user in $users) {
+    foreach ($group in $groups) {
+        Remove-ADGroupMember -Identity $group -Members $user -Confirm:$false -ErrorAction SilentlyContinue
+    }
+}
+
+Write-Host "Group membership removal process completed." -ForegroundColor Green
